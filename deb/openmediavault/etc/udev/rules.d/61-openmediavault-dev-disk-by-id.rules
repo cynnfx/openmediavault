@@ -120,6 +120,56 @@ ENV{ID_VENDOR_ID}=="152d", \
   SYMLINK="disk/by-path/$env{ID_PATH}", \
   SYMLINK+="disk/by-id/$env{ID_BUS}-$env{ID_SERIAL}"
 
+# JMicron USB PATA/SATA bridge/cable
+# https://www.kubii.com/fr/hub-cables-adaptateurs/3151-adaptateur-usb-vers-sata-3272496304642.html?srsltid=AfmBOoqCS_SK7U_VmHvJhnFM4qv85OJHID7Z0RVFjk9NI8PDdw9T4Vz2
+# https://www.amazon.fr/Unnderwiss-Adaptateur-Compatible-externes-dexploitation/dp/B0BP17RP5P/ref=sr_1_5?sr=8-5
+#
+# DEVPATH=/devices/pci0000:00/0000:00:1d.7/usb5/5-1/5-1.1/5-1.1:1.0/host4/target4:0:0/4:0:0:0/block/sdb
+# DEVNAME=/dev/sdb
+# DEVTYPE=disk
+# MAJOR=8
+# MINOR=16
+# SUBSYSTEM=block
+# USEC_INITIALIZED=8658951
+# ID_BUS=usb
+# ID_MODEL=21-1KJ152
+# ID_MODEL_ENC=21-1KJ152\x20\x20\x20\x20\x20\x20\x20
+# ID_MODEL_ID=a580
+# ID_SERIAL=ST500LM0_21-1KJ152_W625ARTC-0:0
+# ID_SERIAL_SHORT=W625ARTC
+# ID_VENDOR=ST500LM0
+# ID_VENDOR_ENC=ST500LM0
+# ID_VENDOR_ID=152d
+# ID_REVISION=0209
+# ID_TYPE=disk
+# ID_INSTANCE=0:0
+# ID_USB_MODEL=21-1KJ152
+# ID_USB_MODEL_ENC=21-1KJ152\x20\x20\x20\x20\x20\x20\x20
+# ID_USB_MODEL_ID=a580
+# ID_USB_SERIAL=ST500LM0_21-1KJ152_000000000069-0:0
+# ID_USB_SERIAL_SHORT=000000000069
+# ID_USB_VENDOR=ST500LM0
+# ID_USB_VENDOR_ENC=ST500LM0
+# ID_USB_VENDOR_ID=152d
+# ID_USB_REVISION=0209
+# ID_USB_TYPE=disk
+# ID_USB_INSTANCE=0:0
+# ID_USB_INTERFACES=:080650:080662:
+# ID_USB_INTERFACE_NUM=00
+# ID_USB_DRIVER=uas
+# ID_PATH=pci-0000:00:1d.7-usb-0:1.1:1.0-scsi-0:0:0:0
+# ID_PATH_TAG=pci-0000_00_1d_7-usb-0_1_1_1_0-scsi-0_0_0_0
+# ID_PART_TABLE_UUID=01a3cbbe
+# ID_PART_TABLE_TYPE=gpt
+# DEVLINKS=...
+# TAGS=:systemd:
+ENV{ID_VENDOR_ID}=="152d", \
+  ENV{ID_MODEL_ID}=="a580", \
+  IMPORT{program}="serial_id %N", \
+  ENV{ID_SERIAL}="$env{ID_VENDOR}_$env{ID_MODEL}_$env{ID_SERIAL_SHORT}-$env{ID_INSTANCE}", \
+  SYMLINK="disk/by-path/$env{ID_PATH}", \
+  SYMLINK+="disk/by-id/$env{ID_BUS}-$env{ID_SERIAL}"
+
 # ORICO 2.5 inch Hard Drive Adapter (27UTS)
 # http://my.orico.cc/goods.php?id=6355
 ATTRS{idVendor}=="0080", \
@@ -600,6 +650,7 @@ ENV{ID_VENDOR_ID}=="1c04", \
   ENV{ID_SERIAL}="$env{ID_VENDOR}_$env{ID_MODEL}_$env{ID_SERIAL_SHORT}-$env{ID_INSTANCE}", \
   SYMLINK="disk/by-path/$env{ID_PATH}", \
   SYMLINK+="disk/by-id/$env{ID_BUS}-$env{ID_SERIAL}"
+
 
 # by-uuid links (filesystem metadata)
 # Skip bcache backing devices, handled in `/lib/udev/rules.d/69-bcache.rules`.
